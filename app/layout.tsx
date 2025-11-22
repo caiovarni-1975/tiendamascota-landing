@@ -1,46 +1,34 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
-import "./globals.css"
+// app/layout.tsx
+"use client";
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+import type React from "react";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import "./globals.css";
+
+// Fuentes (aplico Geist al body)
+const geist = Geist({ subsets: ["latin"] });
+const geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Tienda Mascotera — Lanzamos el 15/12/2025",
-  description: "Juegos, premios y sorpresas para tu mascota. Anotate y participá — AMBA.",
-  generator: "v0.app",
-  icons: {
-    icon: [
-      {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
-    ],
-    apple: "/apple-icon.png",
-  },
-}
+  description:
+    "Juegos, premios y mimos para tu mascota. Anotate y recibí el pase — AMBA.",
+  robots: { index: false, follow: false }, // no indexar mientras es demo
+  // Usamos tu logo existente como favicon (PNG)
+  icons: { icon: "/images/logo_tienda_mascotera_web_1024.png" },
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es">
-      <body className={`font-sans antialiased`}>
+      <body className={`${geist.className} antialiased`}>
         {children}
         <Analytics />
       </body>
     </html>
-  )
+  );
 }
